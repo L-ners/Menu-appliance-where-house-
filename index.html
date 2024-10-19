@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 14px 20px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        form {
+            display: block;
+            margin-top: 20px;
+        }
+
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Company Logo" class="logo">
+        <h1>Service Information Management (SIM) System</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a onclick="showSection('menu')">Main Menu</a></li>
+            <li><a onclick="showSection('appointment')">Schedule Appointment</a></li>
+            <li><a onclick="showSection('contact')">Contact Us</a></li>
+            <li><a onclick="showSection('service-plan')">Service Plans</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Menu -->
+    <section id="menu" class="active">
+        <h2>Main Menu</h2>
+        <ul>
+            <li><a onclick="showSection('appointment')">Appointment Management</a></li>
+            <li><a onclick="showSection('technician')">Technician Portal</a></li>
+            <li><a onclick="showSection('service-plan')">Service Plans</a></li>
+            <li><a onclick="showSection('reports')">Reports</a></li>
+            <li><a onclick="showSection('customer-info')">Customer Information</a></li>
+            <li><a onclick="showSection('contact')">Contact Us</a></li>
+            <li><a onclick="showSection('faq')">Help/FAQ</a></li>
+        </ul>
+    </section>
+
+    <!-- Schedule Appointment (User Input) -->
+    <section id="appointment">
+        <h2>Schedule Appointment</h2>
+        <form id="appointment-form">
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+            <label for="time">Time:</label>
+            <input type="time" id="time" required>
+            <label for="customer-name">Customer Name:</label>
+            <input type="text" id="customer-name" required>
+            <input type="submit" value="Schedule Appointment">
+        </form>
+        <div id="error-message" class="error-message"></div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email us at: <a href="mailto:support@appliancewarehouse.com">support@appliancewarehouse.com</a></p>
+        <p>Call us: 1-800-555-1234</p>
+    </section>
+
+    <!-- Service Plans -->
+    <section id="service-plan">
+        <h2>Our Service Plans</h2>
+        <p>Our flat rate service plans allow you to pay a single fee annually and only pay for parts when serviced.</p>
+        <p>If you use services more than 3 times per year, you'll be charged the full service fee.</p>
+    </section>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const customerName = document.getElementById('customer-name').value;
+
+            if (!date || !time || !customerName) {
+                event.preventDefault();
+                document.getElementById('error-message').textContent = 'All fields are required!';
+            }
+        });
+    </script>
+</body>
+</html>
